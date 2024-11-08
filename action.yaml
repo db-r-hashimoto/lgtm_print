@@ -10,7 +10,8 @@ runs:
         GITHUB_TOKEN: ${{ inputs.github-token }}
         OWNER: ${{ inputs.owner }}
         REPO: ${{ inputs.repo }}
-        ISSUE_NUMBER: ${{ inputs.issue_number }}
+        COMMENT_BODY: ${{ inputs.comment_body }}
+        COMMENT_ID: ${{ inputs.comment_id }}
       run: |
         go run cmd/lgtm-action/main.go
 
@@ -27,6 +28,13 @@ inputs:
   issue_number:
     description: "Issue or Pull Request number"
     required: true
+  comment_body:
+    description: "The content of the comment"
+    required: true
+  comment_id:
+    description: "The ID of the comment"
+    required: true
+
 
 outputs:
   result:
