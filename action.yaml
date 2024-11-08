@@ -1,0 +1,25 @@
+name: "LGTM Bot"
+description: "A GitHub Action that posts a random LGTM image from LGTMOON when 'LGTM' or 'Approve' is detected."
+author: "Your Name"
+runs:
+  using: "composite"
+  steps:
+    - name: Run LGTM Bot
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        go run cmd/lgtm-action/main.go
+
+inputs:
+  github-token:
+    description: "GitHub token for authentication"
+    required: true
+    default: ${{ secrets.GITHUB_TOKEN }}
+
+outputs:
+  result:
+    description: "The result of posting the LGTM image"
+branding:
+  icon: "smile"
+  color: "blue"
