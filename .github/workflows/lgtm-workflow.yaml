@@ -21,7 +21,7 @@ jobs:
           echo "Comment body: ${{ github.event.comment.body }}"
           COMMENT_BODY="${{ github.event.comment.body }}"
           COMMENT_BODY_LOWER=$(echo "$COMMENT_BODY" | tr '[:upper:]' '[:lower:]')
-          if [[ "$COMMENT_BODY_LOWER" != *"lgtm"* ]]; then
+          if [[ "$COMMENT_BODY_LOWER" != *"lgtm"* || "$COMMENT_BODY" == *"![LGTM]"* ]]; then
             echo "skip=true" >> $GITHUB_ENV
           else
             echo "skip=false" >> $GITHUB_ENV
