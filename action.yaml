@@ -15,7 +15,6 @@ inputs:
   github-token:
     description: "GitHub token for authentication"
     required: true
-    default: ${{ secrets.GITHUB_TOKEN }}
 
 outputs:
   result:
