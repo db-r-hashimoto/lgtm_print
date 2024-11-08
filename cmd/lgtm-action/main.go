@@ -9,6 +9,7 @@ import (
 
 	"github.com/db-r-hashimoto/lgtm_print/internal/lgtmoon"
 	"github.com/google/go-github/v48/github"
+	"golang.org/x/oauth2"
 )
 
 func main() {
@@ -33,8 +34,13 @@ func main() {
         log.Fatalf("Invalid ISSUE_NUMBER: %v", err)
     }
 
-    // GitHubクライアントの初期化
-    client := github.NewClient(nil)
+    // OAuth2トークンを設定してGitHubクライアントを作成
+    ctx := context.Background()
+    ts := oauth2.StaticTokenSource(
+        &oauth2.Token{AccessToken: token},
+    )
+    tc := oauth2.NewClient(ctx, ts)
+    client := github.NewClient(tc)
 
     // ランダムなLGTM画像URLを取得
     imageUrl, err := lgtmoon.GetRandomLgtmImageURL()
