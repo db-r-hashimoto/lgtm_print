@@ -25,9 +25,6 @@ inputs:
   repo:
     description: "Repository name"
     required: true
-  issue_number:
-    description: "Issue or Pull Request number"
-    required: true
   comment_body:
     description: "The content of the comment"
     required: true
@@ -35,10 +32,6 @@ inputs:
     description: "The ID of the comment"
     required: true
 
-
-outputs:
-  result:
-    description: "The result of posting the LGTM image"
 branding:
-  icon: "smile"
+  icon: "user"
   color: "blue"
