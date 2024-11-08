@@ -22,14 +22,14 @@ jobs:
           COMMENT_BODY="${{ github.event.comment.body }}"
           COMMENT_BODY_LOWER=$(echo "$COMMENT_BODY" | tr '[:upper:]' '[:lower:]')
           if [[ "$COMMENT_BODY_LOWER" != *"lgtm"* || "$COMMENT_BODY" == *"![LGTM]"* ]]; then
-            echo "skip=true" >> $GITHUB_ENV
+            echo "skip=true" >> $GITHUB_OUTPUT
           else
-            echo "skip=false" >> $GITHUB_ENV
+            echo "skip=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Run LGTM Bot Action
-        if: env.skip == 'false'
-        uses: db-r-hashimoto/lgtm_print@v0.0.1
+        if: steps.check_comment.outputs.skip == 'false'
+        uses: db-r-hashimoto/lgtm_print@v0.0.2
         with:
           github-token: ${{ secrets.GIT_TOKEN }}
           owner: db-r-hashimoto
