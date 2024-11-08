@@ -7,7 +7,7 @@ runs:
     - name: Run LGTM Bot
       shell: bash
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
       run: |
         go run cmd/lgtm-action/main.go
 
