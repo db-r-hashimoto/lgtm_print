@@ -18,3 +18,6 @@ jobs:
         uses: ./
         with:
           github-token: ${{ secrets.GIT_TOKEN }}
+          owner: db-r-hashimoto
+          repo: lgtm_print
+          issue_number: ${{ github.event.issue.number || github.event.pull_request.number }}

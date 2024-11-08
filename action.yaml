@@ -8,12 +8,24 @@ runs:
       shell: bash
       env:
         GITHUB_TOKEN: ${{ inputs.github-token }}
+        OWNER: ${{ inputs.owner }}
+        REPO: ${{ inputs.repo }}
+        ISSUE_NUMBER: ${{ inputs.issue_number }}
       run: |
         go run cmd/lgtm-action/main.go
 
 inputs:
   github-token:
     description: "GitHub token for authentication"
+    required: true
+  owner:
+    description: "Repository owner"
+    required: true
+  repo:
+    description: "Repository name"
+    required: true
+  issue_number:
+    description: "Issue or Pull Request number"
     required: true
 
 outputs:
