@@ -2,10 +2,11 @@ name: LGTM Bot
 
 on:
   issue_comment:
-    types: [created]
+    types: [created, edited]
   pull_request_review:
-    types: [submitted]
-  workflow_dispatch:
+    types: [submitted, edited]
+  pull_request_review_comment:
+    types: [created, edited]
 
 jobs:
   lgtm:
@@ -14,7 +15,20 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Check if comment contains 'lgtm'
+        id: check_comment
+        run: |
+          echo "Comment body: ${{ github.event.comment.body }}"
+          COMMENT_BODY="${{ github.event.comment.body }}"
+          COMMENT_BODY_LOWER=$(echo "$COMMENT_BODY" | tr '[:upper:]' '[:lower:]')
+          if [[ "$COMMENT_BODY_LOWER" != *"lgtm"* ]]; then
+            echo "skip=true" >> $GITHUB_ENV
+          else
+            echo "skip=false" >> $GITHUB_ENV
+          fi
+
       - name: Run LGTM Bot Action
+        if: env.skip == 'false'
         uses: ./
         with:
           github-token: ${{ secrets.GIT_TOKEN }}
