@@ -56,7 +56,6 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           owner: ${{ github.repository_owner }}
           repo: ${{ github.event.repository.name }}
-          issue_number: ${{ github.event.issue.number || github.event.pull_request.number }}
           comment_body: ${{ github.event.comment.body }}
           comment_id: ${{ github.event.comment.id }}
 ```
@@ -68,7 +67,6 @@ jobs:
 | `github-token`  | GitHub token for authentication            | Yes      | `${{ secrets.GITHUB_TOKEN }}`|
 | `owner`         | Repository owner                           | Yes      |                              |
 | `repo`          | Repository name                            | Yes      |                              |
-| `issue_number`  | Issue or Pull Request number               | Yes      |                              |
 | `comment_body`  | The content of the comment                 | Yes      |                              |
 | `comment_id`    | The ID of the comment                      | Yes      |                              |
 
